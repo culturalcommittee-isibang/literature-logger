@@ -1,0 +1,89 @@
+/* Center the main title at the top */
+#main-title {
+  width: 100vw;
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Center the event log below the central UI */
+#event-log-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+#event-log-container h2 {
+  text-align: center;
+}
+#log-list {
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  list-style-position: inside;
+  text-align: left;
+  min-width: 260px;
+  max-width: 420px;
+}
+/* Reset all styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+  background: #f9f9f9;
+  color: #222;
+}
+
+/* Center the log method selector and form fields */
+#central-ui {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+  min-width: 320px;
+}
+
+#central-ui label {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+#central-ui select, #central-ui input, #central-ui button {
+  font-size: 0.95rem;
+  padding: 0.2rem 0.5rem;
+  min-width: 90px;
+  max-width: 180px;
+  margin: 0.2rem 0.3rem;
+  border-radius: 0.3rem;
+  border: 1px solid #bbb;
+}
+
+#central-ui button {
+  background: #2d7ef7;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#central-ui button:hover {
+  background: #155ab6;
+}
+
+/* Hide forms/buttons by default, shown by JS */
+form[style*="display:none"], button[style*="display:none"] {
+  display: none !important;
+}
