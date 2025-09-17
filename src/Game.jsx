@@ -317,32 +317,35 @@ function Game() {
                 </div>
             </div>
 
-            <div id="teams-layout" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'stretch', margin: '2em 0' }}>
-                <div id="team-a" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '300px', minWidth: '120px' }}>
-                    {teamA.map((p, i) => (
-                        <div id={teamAIds[i]} key={p} style={{ textAlign: 'left' }}>
-                            {p && (
-                                <>
-                                    <div><strong>{p}</strong></div>
-                                    {sortCards(players[p] || []).map(card => <div key={card}>{cardAlias(card)}</div>)}
-                                </>
-                            )}
-                        </div>
-                    ))}
-                </div>
-                <div style={{ flex: 1 }}></div>
-                <div id="team-b" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '300px', minWidth: '120px', alignItems: 'flex-end' }}>
-                    {teamB.map((p, i) => (
-                        <div id={teamBIds[i]} key={p} style={{ textAlign: 'right' }}>
-                            {p && (
-                                <>
-                                    <div><strong>{p}</strong></div>
-                                    {sortCards(players[p] || []).map(card => <div key={card}>{cardAlias(card)}</div>)}
-                                </>
-                            )}
-                        </div>
-                    ))}
-                </div>
+            <div id="teams-layout">
+                {teamA.map((p, i) => (
+                    <div id={teamAIds[i]} key={p} className="player-panel team-a" data-pos={i}>
+                        {p && (
+                            <>
+                                <div className="player-name"><strong>{p}</strong></div>
+                                <div className="cards" title={sortCards(players[p] || []).map(cardAlias).join(', ')}>
+                                    {sortCards(players[p] || []).map(c => (
+                                        <div className="card-line" key={c}>{cardAlias(c)}</div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </div>
+                ))}
+                {teamB.map((p, i) => (
+                    <div id={teamBIds[i]} key={p} className="player-panel team-b" data-pos={i}>
+                        {p && (
+                            <>
+                                <div className="player-name"><strong>{p}</strong></div>
+                                <div className="cards" title={sortCards(players[p] || []).map(cardAlias).join(', ')}>
+                                    {sortCards(players[p] || []).map(c => (
+                                        <div className="card-line" key={c}>{cardAlias(c)}</div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </div>
+                ))}
             </div>
         </div>
     );
