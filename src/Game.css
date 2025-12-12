@@ -49,7 +49,7 @@ body {
 
 .player-panel {
   position: absolute;
-  width: 220px; /* consistent panel width */
+  width: 420px; /* more horizontal room for up to 7 cards */
   font-size: 0.8rem;
   line-height: 1.1rem;
   background: rgba(255,255,255,0.85);
@@ -58,7 +58,7 @@ body {
   border-radius: 0.55rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
   pointer-events: auto;
-  overflow: hidden;
+  overflow: visible; /* let the card grid and scrollbar render fully */
 }
 
 .player-panel .player-name { 
@@ -88,16 +88,18 @@ body {
   .player-panel { font-size: 0.7rem; }
 }
 
-/* Single-line card list */
-/* Vertical list of card names */
+/* Compact card grid (max 7 columns) */
 .player-panel .cards {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(7, auto);
   gap: 2px;
   max-height: 38vh; /* prevent runaway height */
   overflow-y: auto;
-  margin-top: 0.25rem;
+  overflow-x: hidden;
+  margin-top: 0.2rem;
   padding-right: 2px;
+  justify-items: center;
+  width: 100%;
 }
 
 .player-panel .cards::-webkit-scrollbar {
@@ -111,18 +113,8 @@ body {
   border-radius: 3px;
 }
 
-.player-panel .card-line {
-  font-size: 0.66rem;
-  line-height: 0.75rem;
-  font-weight: 500;
-  white-space: nowrap; /* do not wrap card name */
-  text-overflow: ellipsis;
-  overflow: hidden; /* truncate overly long alias gracefully */
-}
-
 @media (max-width: 900px) {
-  .player-panel { width: 190px; }
-  .player-panel .card-line { font-size: 0.6rem; }
+  .player-panel { width: 320px; }
 }
 
 /* Center the log method selector and form fields */

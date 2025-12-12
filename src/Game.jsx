@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import SvgCard from './components/SvgCard';
 import GameState from './logic.js';
 import './Game.css';
 
@@ -323,9 +324,17 @@ function Game() {
                         {p && (
                             <>
                                 <div className="player-name"><strong>{p}</strong></div>
-                                <div className="cards" title={sortCards(players[p] || []).map(cardAlias).join(', ')}>
+                                <div
+                                    className="cards cards-grid"
+                                    title={sortCards(players[p] || []).map(cardAlias).join(', ')}
+                                >
                                     {sortCards(players[p] || []).map(c => (
-                                        <div className="card-line" key={c}>{cardAlias(c)}</div>
+                                        <SvgCard
+                                            key={c}
+                                            code={c}
+                                            scale={0.23}
+                                            title={cardAlias(c)}
+                                        />
                                     ))}
                                 </div>
                             </>
@@ -337,9 +346,17 @@ function Game() {
                         {p && (
                             <>
                                 <div className="player-name"><strong>{p}</strong></div>
-                                <div className="cards" title={sortCards(players[p] || []).map(cardAlias).join(', ')}>
+                                <div
+                                    className="cards cards-grid"
+                                    title={sortCards(players[p] || []).map(cardAlias).join(', ')}
+                                >
                                     {sortCards(players[p] || []).map(c => (
-                                        <div className="card-line" key={c}>{cardAlias(c)}</div>
+                                        <SvgCard
+                                            key={c}
+                                            code={c}
+                                            scale={0.23}
+                                            title={cardAlias(c)}
+                                        />
                                     ))}
                                 </div>
                             </>
