@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import SvgCard from './components/SvgCard';
+import PlayerCardGrid from './components/PlayerCardGrid';
+import useMakeCallDragDrop from './hooks/useMakeCallDragDrop';
 import GameState from './logic.js';
 import './Game.css';
 
@@ -153,6 +154,20 @@ function Game() {
     const [passer, setPasser] = useState('');
     const { teamA: passerTeamA, teamB: passerTeamB } = getTeams();
     const sameTeam = passerTeamA.includes(passer) ? passerTeamA.filter(p => p !== passer) : passerTeamB.filter(p => p !== passer);
+
+    const getTeamOf = (player) => {
+        if (teamA.includes(player)) return 'A';
+        if (teamB.includes(player)) return 'B';
+        return null;
+    };
+
+    const dragDrop = useMakeCallDragDrop({
+        isEnabled: method === 'make-call-form',
+        gameInstance: game,
+        setPlayers,
+        setLogs,
+        getTeamOf,
+    });
 
 
     return (
@@ -320,45 +335,47 @@ function Game() {
 
             <div id="teams-layout">
                 {teamA.map((p, i) => (
-                    <div id={teamAIds[i]} key={p} className="player-panel team-a" data-pos={i}>
+                    <div id={teamAIds[i]} key={p} className={`player-panel team-a ${game.caller === p ? 'is-caller' : ''}`} data-pos={i}>
                         {p && (
                             <>
-                                <div className="player-name"><strong>{p}</strong></div>
-                                <div
-                                    className="cards cards-grid"
-                                    title={sortCards(players[p] || []).map(cardAlias).join(', ')}
-                                >
-                                    {sortCards(players[p] || []).map(c => (
-                                        <SvgCard
-                                            key={c}
-                                            code={c}
-                                            scale={0.23}
-                                            title={cardAlias(c)}
-                                        />
-                                    ))}
+                                <div className="player-name">
+                                    <strong>{p}</strong>
+                                    {game.caller === p && <span className="caller-chip">Caller</span>}
                                 </div>
+                                <PlayerCardGrid
+                                    playerName={p}
+                                    cards={sortCards(players[p] || [])}
+                                    cardScale={0.23}
+                                    draggableEnabled={method === 'make-call-form'}
+                                    onCardDragStart={dragDrop.onCardDragStart}
+                                    onCardDragEnd={dragDrop.onCardDragEnd}
+                                    onPanelDragOver={dragDrop.onPanelDragOver}
+                                    onPanelDrop={dragDrop.onPanelDrop}
+                                    title={sortCards(players[p] || []).map(cardAlias).join(', ')}
+                                />
                             </>
                         )}
                     </div>
                 ))}
                 {teamB.map((p, i) => (
-                    <div id={teamBIds[i]} key={p} className="player-panel team-b" data-pos={i}>
+                    <div id={teamBIds[i]} key={p} className={`player-panel team-b ${game.caller === p ? 'is-caller' : ''}`} data-pos={i}>
                         {p && (
                             <>
-                                <div className="player-name"><strong>{p}</strong></div>
-                                <div
-                                    className="cards cards-grid"
-                                    title={sortCards(players[p] || []).map(cardAlias).join(', ')}
-                                >
-                                    {sortCards(players[p] || []).map(c => (
-                                        <SvgCard
-                                            key={c}
-                                            code={c}
-                                            scale={0.23}
-                                            title={cardAlias(c)}
-                                        />
-                                    ))}
+                                <div className="player-name">
+                                    <strong>{p}</strong>
+                                    {game.caller === p && <span className="caller-chip">Caller</span>}
                                 </div>
+                                <PlayerCardGrid
+                                    playerName={p}
+                                    cards={sortCards(players[p] || [])}
+                                    cardScale={0.23}
+                                    draggableEnabled={method === 'make-call-form'}
+                                    onCardDragStart={dragDrop.onCardDragStart}
+                                    onCardDragEnd={dragDrop.onCardDragEnd}
+                                    onPanelDragOver={dragDrop.onPanelDragOver}
+                                    onPanelDrop={dragDrop.onPanelDrop}
+                                    title={sortCards(players[p] || []).map(cardAlias).join(', ')}
+                                />
                             </>
                         )}
                     </div>

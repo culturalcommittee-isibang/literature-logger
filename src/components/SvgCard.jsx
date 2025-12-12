@@ -106,7 +106,17 @@ function resolveSpec(code) {
   return buildJokerSpec(code) || buildPlayingSpec(code);
 }
 
-export default function SvgCard({ code, scale = 1, className, style, title }) {
+export default function SvgCard({
+  code,
+  scale = 1,
+  className,
+  style,
+  title,
+  draggable,
+  onDragStart,
+  onDragEnd,
+  ...rest
+}) {
   const spec = resolveSpec(code);
   if (!spec) return null;
 
@@ -132,6 +142,10 @@ export default function SvgCard({ code, scale = 1, className, style, title }) {
       viewBox={`${viewBoxX} ${viewBoxY} ${cardWidth} ${cardHeight}`}
       className={className}
       style={{ imageRendering: 'pixelated', shapeRendering: 'crispEdges', ...style }}
+      draggable={draggable}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+      {...rest}
     >
       {label && <title>{label}</title>}
       <image

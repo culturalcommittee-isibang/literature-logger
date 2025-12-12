@@ -67,6 +67,24 @@ body {
   text-align: inherit; /* inherit alignment from team container */
 }
 
+.player-panel.is-caller {
+  border: 2px solid #2d7ef7;
+  box-shadow: 0 3px 10px rgba(45, 126, 247, 0.25);
+}
+
+.caller-chip {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #0c47a1;
+  background: #e7f0ff;
+  border: 1px solid #bcd6ff;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+
 /* Explicit alignment per team to ensure correctness */
 .team-a .player-name { text-align: left; }
 .team-b .player-name { text-align: right; }
@@ -100,6 +118,19 @@ body {
   padding-right: 2px;
   justify-items: center;
   width: 100%;
+}
+
+.cards-draggable svg {
+  cursor: grab;
+}
+
+.card-chip {
+  cursor: grab;
+}
+
+.cards-over {
+  outline: 1px dashed #2d7ef7;
+  outline-offset: 2px;
 }
 
 .player-panel .cards::-webkit-scrollbar {
