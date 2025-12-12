@@ -19,6 +19,20 @@
 #event-log-container h2 {
   text-align: center;
 }
+#download-logs-btn {
+  margin-top: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.85rem;
+  border-radius: 0.35rem;
+  border: 1px solid #2d7ef7;
+  background: #f3f7ff;
+  color: #0c47a1;
+  cursor: pointer;
+}
+#download-logs-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 #log-list {
   margin: 0.5rem 0 0 0;
   padding: 0;

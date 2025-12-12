@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PlayerCardGrid from './components/PlayerCardGrid';
 import useMakeCallDragDrop from './hooks/useMakeCallDragDrop';
+import { downloadLogsAsText } from './utils/downloadLogs';
 import GameState from './logic.js';
 import './Game.css';
 
@@ -145,6 +146,10 @@ function Game() {
         } catch (err) { alert(err.message); }
         setPlayers({ ...game.players });
         setLogs([...game.logs]);
+    };
+
+    const handleDownloadLogs = () => {
+        downloadLogsAsText(logs);
     };
 
     const [makeCallCaller, setMakeCallCaller] = useState('');
@@ -324,6 +329,14 @@ function Game() {
 
                 <div id="event-log-container">
                     <h2>Event Log</h2>
+                    <button
+                        id="download-logs-btn"
+                        type="button"
+                        onClick={handleDownloadLogs}
+                        disabled={!logs.length}
+                    >
+                        Download Logs
+                    </button>
                     <ol id="log-list">
                         {logs.map((entry, idx) => {
                             const [type, msg] = Object.entries(entry)[0];
