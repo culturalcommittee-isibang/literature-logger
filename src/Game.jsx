@@ -180,152 +180,156 @@ function Game() {
             <h1 id="main-title">Literature Logger</h1>
 
             <div id="central-ui">
-                <label htmlFor="method-select"><strong>Select Log Method:</strong></label>
-                <select id="method-select" value={method} onChange={(e) => setMethod(e.target.value)}>
-                    <option value="set-players-form">Set Players</option>
-                    <option value="shuffle-btn">Shuffle & Deal Cards</option>
-                    <option value="set-caller-form">Set Caller</option>
-                    <option value="make-call-form">Make Call</option>
-                    <option value="pit-drop-form">Pit Drop</option>
-                    <option value="pit-burn-form">Pit Burn</option>
-                    <option value="pass-card-form">Pass Card</option>
-                    <option value="force-shift-form">Force Card Shift</option>
-                </select>
+                <div className="method-picker">
+                    <label htmlFor="method-select"><strong>Select Log Method:</strong></label>
+                    <select id="method-select" value={method} onChange={(e) => setMethod(e.target.value)}>
+                        <option value="set-players-form">Set Players</option>
+                        <option value="shuffle-btn">Shuffle & Deal Cards</option>
+                        <option value="set-caller-form">Set Caller</option>
+                        <option value="make-call-form">Make Call</option>
+                        <option value="pit-drop-form">Pit Drop</option>
+                        <option value="pit-burn-form">Pit Burn</option>
+                        <option value="pass-card-form">Pass Card</option>
+                        <option value="force-shift-form">Force Card Shift</option>
+                    </select>
+                </div>
 
-                {method === 'set-players-form' && (
-                    <form id="set-players-form" ref={setPlayersFormRef} onSubmit={handleSetPlayers}>
-                        <h2>Set Players</h2>
-                        <input name="player_1A" placeholder="Team 1 - Player A" required />
-                        <input name="player_1B" placeholder="Team 1 - Player B" required />
-                        <input name="player_1C" placeholder="Team 1 - Player C" required />
-                        <input name="player_2A" placeholder="Team 2 - Player A" required />
-                        <input name="player_2B" placeholder="Team 2 - Player B" required />
-                        <input name="player_2C" placeholder="Team 2 - Player C" required />
-                        <button type="submit">Set Players</button>
-                    </form>
-                )}
+                <div id="method-content">
+                    {method === 'set-players-form' && (
+                        <form id="set-players-form" ref={setPlayersFormRef} onSubmit={handleSetPlayers}>
+                            <h2>Set Players</h2>
+                            <input name="player_1A" placeholder="Team 1 - Player A" required />
+                            <input name="player_1B" placeholder="Team 1 - Player B" required />
+                            <input name="player_1C" placeholder="Team 1 - Player C" required />
+                            <input name="player_2A" placeholder="Team 2 - Player A" required />
+                            <input name="player_2B" placeholder="Team 2 - Player B" required />
+                            <input name="player_2C" placeholder="Team 2 - Player C" required />
+                            <button type="submit">Set Players</button>
+                        </form>
+                    )}
 
-                {method === 'shuffle-btn' && <button id="shuffle-btn" onClick={handleShuffle}>Shuffle & Deal Cards</button>}
+                    {method === 'shuffle-btn' && <button id="shuffle-btn" onClick={handleShuffle}>Shuffle & Deal Cards</button>}
 
-                {method === 'set-caller-form' && (
-                    <form id="set-caller-form" ref={setCallerFormRef} onSubmit={handleSetCaller}>
-                        <h2>Set Caller</h2>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Caller</label>
-                            <select name="caller" required style={{ flex: 1 }}>
-                                {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <button type="submit">Set Caller</button>
-                    </form>
-                )}
+                    {method === 'set-caller-form' && (
+                        <form id="set-caller-form" ref={setCallerFormRef} onSubmit={handleSetCaller}>
+                            <h2>Set Caller</h2>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Caller</label>
+                                <select name="caller" required style={{ flex: 1 }}>
+                                    {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <button type="submit">Set Caller</button>
+                        </form>
+                    )}
 
-                {method === 'make-call-form' && (
-                    <form id="make-call-form" ref={makeCallFormRef} onSubmit={handleMakeCall}>
-                        <h2>Make Call</h2>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Caller</label>
-                            <select name="caller" required style={{ flex: 1 }} onChange={e => setMakeCallCaller(e.target.value)}>
-                                {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Callee (Opposite Team)</label>
-                            <select name="callee" required style={{ flex: 1 }}>
-                                {oppositeTeam.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Card</label>
-                            <select name="card" required style={{ flex: 1 }}>
-                                {allCards.map(c => <option key={c} value={c}>{cardAlias(c)}</option>)}
-                            </select>
-                        </div>
-                        <button type="submit">Log Call</button>
-                    </form>
-                )}
+                    {method === 'make-call-form' && (
+                        <form id="make-call-form" ref={makeCallFormRef} onSubmit={handleMakeCall}>
+                            <h2>Make Call</h2>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Caller</label>
+                                <select name="caller" required style={{ flex: 1 }} onChange={e => setMakeCallCaller(e.target.value)}>
+                                    {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Callee (Opposite Team)</label>
+                                <select name="callee" required style={{ flex: 1 }}>
+                                    {oppositeTeam.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Card</label>
+                                <select name="card" required style={{ flex: 1 }}>
+                                    {allCards.map(c => <option key={c} value={c}>{cardAlias(c)}</option>)}
+                                </select>
+                            </div>
+                            <button type="submit">Log Call</button>
+                        </form>
+                    )}
 
-                {method === 'pit-drop-form' && (
-                    <form id="pit-drop-form" ref={pitDropFormRef} onSubmit={handlePitDrop}>
-                        <h2>Pit Drop</h2>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Dropper</label>
-                            <select name="dropper" required style={{ flex: 1 }}>
-                                {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Card</label>
-                            <select name="card" required style={{ flex: 1 }}>
-                                {allCards.map(c => <option key={c} value={c}>{cardAlias(c)}</option>)}
-                            </select>
-                        </div>
-                        <button type="submit">Log Pit Drop</button>
-                    </form>
-                )}
+                    {method === 'pit-drop-form' && (
+                        <form id="pit-drop-form" ref={pitDropFormRef} onSubmit={handlePitDrop}>
+                            <h2>Pit Drop</h2>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Dropper</label>
+                                <select name="dropper" required style={{ flex: 1 }}>
+                                    {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Card</label>
+                                <select name="card" required style={{ flex: 1 }}>
+                                    {allCards.map(c => <option key={c} value={c}>{cardAlias(c)}</option>)}
+                                </select>
+                            </div>
+                            <button type="submit">Log Pit Drop</button>
+                        </form>
+                    )}
 
-                {method === 'pit-burn-form' && (
-                    <form id="pit-burn-form" ref={pitBurnFormRef} onSubmit={handlePitBurn}>
-                        <h2>Pit Burn</h2>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Burner</label>
-                            <select name="burner" required style={{ flex: 1 }}>
-                                {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Card</label>
-                            <select name="card" required style={{ flex: 1 }}>
-                                {allCards.map(c => <option key={c} value={c}>{cardAlias(c)}</option>)}
-                            </select>
-                        </div>
-                        <button type="submit">Log Pit Burn</button>
-                    </form>
-                )}
+                    {method === 'pit-burn-form' && (
+                        <form id="pit-burn-form" ref={pitBurnFormRef} onSubmit={handlePitBurn}>
+                            <h2>Pit Burn</h2>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Burner</label>
+                                <select name="burner" required style={{ flex: 1 }}>
+                                    {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Card</label>
+                                <select name="card" required style={{ flex: 1 }}>
+                                    {allCards.map(c => <option key={c} value={c}>{cardAlias(c)}</option>)}
+                                </select>
+                            </div>
+                            <button type="submit">Log Pit Burn</button>
+                        </form>
+                    )}
 
-                {method === 'pass-card-form' && (
-                    <form id="pass-card-form" ref={passCardFormRef} onSubmit={handlePassCard}>
-                        <h2>Pass Card</h2>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Passer</label>
-                            <select name="passer" required style={{ flex: 1 }} onChange={e => setPasser(e.target.value)}>
-                                {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Passee (Same Team)</label>
-                            <select name="passee" required style={{ flex: 1 }}>
-                                {sameTeam.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <button type="submit">Log Pass</button>
-                    </form>
-                )}
+                    {method === 'pass-card-form' && (
+                        <form id="pass-card-form" ref={passCardFormRef} onSubmit={handlePassCard}>
+                            <h2>Pass Card</h2>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Passer</label>
+                                <select name="passer" required style={{ flex: 1 }} onChange={e => setPasser(e.target.value)}>
+                                    {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Passee (Same Team)</label>
+                                <select name="passee" required style={{ flex: 1 }}>
+                                    {sameTeam.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <button type="submit">Log Pass</button>
+                        </form>
+                    )}
 
-                {method === 'force-shift-form' && (
-                    <form id="force-shift-form" ref={forceShiftFormRef} onSubmit={handleForceShift}>
-                        <h2>Force Card Shift</h2>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>From</label>
-                            <select name="fromPlayer" required style={{ flex: 1 }}>
-                                {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>To</label>
-                            <select name="toPlayer" required style={{ flex: 1 }}>
-                                {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <label style={{ minWidth: '120px' }}>Card</label>
-                            <select name="card" required style={{ flex: 1 }}>
-                                {allCards.map(c => <option key={c} value={c}>{cardAlias(c)}</option>)}
-                            </select>
-                        </div>
-                        <button type="submit">Log Force Shift</button>
-                    </form>
-                )}
+                    {method === 'force-shift-form' && (
+                        <form id="force-shift-form" ref={forceShiftFormRef} onSubmit={handleForceShift}>
+                            <h2>Force Card Shift</h2>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>From</label>
+                                <select name="fromPlayer" required style={{ flex: 1 }}>
+                                    {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>To</label>
+                                <select name="toPlayer" required style={{ flex: 1 }}>
+                                    {playerNames.map(p => <option key={p} value={p}>{p}</option>)}
+                                </select>
+                            </div>
+                            <div className="field-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                                <label style={{ minWidth: '120px' }}>Card</label>
+                                <select name="card" required style={{ flex: 1 }}>
+                                    {allCards.map(c => <option key={c} value={c}>{cardAlias(c)}</option>)}
+                                </select>
+                            </div>
+                            <button type="submit">Log Force Shift</button>
+                        </form>
+                    )}
+                </div>
 
                 <div id="event-log-container">
                     <h2>Event Log</h2>
