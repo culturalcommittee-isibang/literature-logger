@@ -1,1 +1,60 @@
-@import "tailwindcss";
+:root {
+	--bg: #0a0a0a;
+	--fg: #f2f0e4;
+	--card-bg: #141414;
+	--gold: #d4af37;
+	--blue: #1e3d59;
+	--muted: #888888;
+	--border-strong: #d4af37;
+	--border-soft: rgba(212, 175, 55, 0.4);
+	--glow: 0 0 15px rgba(212, 175, 55, 0.2);
+	--radius-none: 0px;
+	--radius-sm: 2px;
+	--transition-fast: 200ms ease-out;
+	--transition-slow: 450ms ease-out;
+	--tracking-wide: 0.2em;
+	--shadow-strong: 0 0 22px rgba(212, 175, 55, 0.28);
+}
+
+/* Self-hosted fonts (add files to /public/fonts) */
+@font-face {
+	font-family: 'Marcellus';
+	src: url('/fonts/Marcellus-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Josefin Sans';
+	src: url('/fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+	font-weight: 200 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: 'Josefin Sans', 'Helvetica Neue', Arial, sans-serif;
+	letter-spacing: 0.01em;
+	background:
+		radial-gradient(circle at 50% 18%, rgba(212, 175, 55, 0.12), transparent 48%),
+		repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.07) 0, rgba(212, 175, 55, 0.07) 2px, transparent 2px, transparent 16px),
+		repeating-linear-gradient(-45deg, rgba(212, 175, 55, 0.05) 0, rgba(212, 175, 55, 0.05) 2px, transparent 2px, transparent 16px),
+		var(--bg);
+	color: var(--fg);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+a {
+	color: var(--gold);
+}
+
+#root {
+	isolation: isolate; /* keep backdrop-filter effects contained */
+}
