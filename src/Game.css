@@ -125,7 +125,7 @@ body {
   display: grid;
   grid-template-columns: repeat(7, auto);
   gap: 2px;
-  max-height: 38vh; /* prevent runaway height */
+  max-height: 25vh; /* roughly two card heights at current scale */
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: 0.2rem;
