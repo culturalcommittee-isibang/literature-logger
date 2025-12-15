@@ -413,3 +413,33 @@ body::-webkit-scrollbar-thumb {
 form[style*="display:none"], button[style*="display:none"] {
   display: none !important;
 }
+
+/* Footer credit */
+#app-footer {
+  position: fixed;
+  bottom: 0.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem 0.6rem;
+  background: rgba(10, 10, 10, 0.78);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-sm);
+  color: var(--fg);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  gap: 0.3rem;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+  z-index: 12;
+}
+#app-footer a {
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+#app-footer a:hover {
+  text-decoration: underline;
+}

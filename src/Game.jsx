@@ -398,6 +398,13 @@ function Game() {
                     </div>
                 ))}
             </div>
+
+            <footer id="app-footer">
+                <span>Developed by </span>
+                <a href="https://github.com/MaxMight01/" target="_blank" rel="noreferrer">
+                    MaxMight01
+                </a>
+            </footer>
         </div>
     );
 }
